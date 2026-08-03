@@ -1662,6 +1662,15 @@ function install_tdo_dump() {
     add-to-list "tdo_dump,https://github.com/AlmondOffSec/tdo_dump,Proof-of-Concept tool to dump trusted domain objects and extract trust credentials for lateral movement across domain boundaries"
 }
 
+function install_adhammer(){
+    # CODE-CHECK-WHITELIST=add-aliases
+    colorecho "Installing adhammer"
+    cargo install adhammer
+    add-history adhammer
+    add-test-command "adhammer --help"
+    add-to-list "adhammer,https://github.com/icedracon/adhammer,An Active Directory security-assessment toolkit in Rust"
+}
+
 # Package dedicated to internal Active Directory tools
 function package_ad() {
     set_env
@@ -1785,6 +1794,7 @@ function package_ad() {
     install_bloodbash              # Bloodhound in terminal
     install_evenmonitor            # Monitor the Windows Event Log with grep-like features or filtering for specific Event IDs
     install_tdo_dump               # Dump trusted domain objects to extract trust credentials
+    install_adhammer               # Active Directory audit tool in rust
     post_install
     end_time=$(date +%s)
     local elapsed_time=$((end_time - start_time))
